@@ -2,9 +2,17 @@ namespace BurgerKiosk
 {
     public partial class Form1 : Form
     {
+        private List<Control> navList;
         public Form1()
         {
             InitializeComponent();
+
+            rdoHamBurger.AutoCheck = false;
+            rdoBulgogiBurger.AutoCheck = false;
+            rdoChickenBurger.AutoCheck = false;
+
+            navList = new List<Control> {
+                rdoHamBurger, rdoBulgogiBurger, rdoChickenBurger};
         }
 
         int totalCost = 0;
@@ -75,6 +83,44 @@ namespace BurgerKiosk
             }
 
             lblTotalCost.Text = "총 금액: " + totalCost.ToString("N0") + "원";
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            Control activeControl = this.ActiveControl;
+
+            if (keyData == Keys.Up || keyData == Keys.Down)
+            {
+                if (navList.Contains(activeControl))
+                {
+                    int currentIndex = navList.IndexOf(activeControl);
+                    int nextIndex = currentIndex;
+
+                    if (keyData == Keys.Down)
+                    {
+                        nextIndex = (currentIndex + 1) % navList.Count;
+                    }
+                    else if (keyData == Keys.Up)
+                    {
+                        nextIndex = (currentIndex - 1 + navList.Count) % navList.Count;
+                    }
+
+                    navList[nextIndex].Focus();
+                    return true;
+                }
+            }
+
+            if (keyData == Keys.Space && activeControl is RadioButton rdo)
+            {
+                rdoHamBurger.Checked = false;
+                rdoBulgogiBurger.Checked = false;
+                rdoChickenBurger.Checked = false;
+
+                rdo.Checked = true;
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
