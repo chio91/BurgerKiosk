@@ -13,9 +13,19 @@ namespace BurgerKiosk
 
             navList = new List<Control> {
                 rdoHamBurger, rdoBulgogiBurger, rdoChickenBurger};
+
+            chkPotato.CheckedChanged += Option_CheckedChanged;
+            chkCola.CheckedChanged += Option_CheckedChanged;
+            chkCheese.CheckedChanged += Option_CheckedChanged;
+            chkSauce.CheckedChanged += Option_CheckedChanged;
         }
 
         int totalCost = 0;
+
+        private void Option_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateOrderSummary();
+        }
 
         private void btninit_Click(object sender, EventArgs e)
         {
@@ -121,6 +131,53 @@ namespace BurgerKiosk
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void UpdateOrderSummary()
+        {
+            totalCost = 0;
+            lstOrder.Items.Clear();
+
+            if (rdoHamBurger.Checked) AddOrder("햄버거", 5000);
+            else if (rdoBulgogiBurger.Checked) AddOrder("불고기버거", 4000);
+            else if (rdoChickenBurger.Checked) AddOrder("치킨버거", 3000);
+
+            if (chkPotato.Checked) AddOrder("감자튀김", 3500);
+            if (chkCola.Checked) AddOrder("콜라", 2500);
+            if (chkCheese.Checked) AddOrder("치즈 추가", 1500);
+            if (chkSauce.Checked) AddOrder("소스 추가", 500);
+
+            if (totalCost > 0)
+            {
+                lblTotalCost.ForeColor = Color.CornflowerBlue;
+                lblTotalCost.Text = $"총 금액: {totalCost:N0}원";
+            }
+            else
+            {
+                lblTotalCost.ForeColor = Color.Red;
+                lblTotalCost.Text = "주문을 입력하세요.";
+            }
+        }
+
+        private void AddOrder(string name, int price)
+        {
+            totalCost += price;
+            lstOrder.Items.Add($"{name} {price:N0}원");
+        }
+
+        private void RdoBurger_Click(object sender, EventArgs e)
+        {
+            rdoHamBurger.Checked = false;
+            rdoBulgogiBurger.Checked = false;
+            rdoChickenBurger.Checked = false;
+
+            RadioButton clickedRdo = sender as RadioButton;
+            if (clickedRdo != null)
+            {
+                clickedRdo.Checked = true;
+            }
+
+            UpdateOrderSummary();
         }
     }
 }
