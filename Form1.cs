@@ -21,6 +21,7 @@ namespace BurgerKiosk
             chkSauce.Checked = false;
 
             lstOrder.Items.Clear();
+            lblTotalCost.ForeColor = Color.CornflowerBlue;
             lblTotalCost.Text = "총 금액 : 0원";
             totalCost = 0;
         }
@@ -29,11 +30,12 @@ namespace BurgerKiosk
         {
             if (!rdoHamBurger.Checked && !rdoBulgogiBurger.Checked && !rdoChickenBurger.Checked)
             {
-                lblError.Visible = true;
+                lblTotalCost.ForeColor = Color.Red;
+                lblTotalCost.Text = "주문을 입력하세요.";
                 return;
             }
-
-            lblError.Visible = false;
+;
+            lblTotalCost.ForeColor = Color.CornflowerBlue;
 
             if (rdoHamBurger.Checked)
             {

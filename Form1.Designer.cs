@@ -47,7 +47,6 @@
             lstOrder = new ListBox();
             btnOrder = new Button();
             btninit = new Button();
-            lblError = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -252,7 +251,7 @@
             btnOrder.BackColor = Color.LimeGreen;
             btnOrder.Font = new Font("맑은 고딕", 9.857143F, FontStyle.Bold, GraphicsUnit.Point, 129);
             btnOrder.ForeColor = SystemColors.ControlLight;
-            btnOrder.Location = new Point(683, 522);
+            btnOrder.Location = new Point(683, 496);
             btnOrder.Name = "btnOrder";
             btnOrder.Size = new Size(144, 52);
             btnOrder.TabIndex = 13;
@@ -265,7 +264,7 @@
             btninit.BackColor = Color.Red;
             btninit.Font = new Font("맑은 고딕", 9.857143F, FontStyle.Bold, GraphicsUnit.Point, 129);
             btninit.ForeColor = SystemColors.ControlLight;
-            btninit.Location = new Point(879, 522);
+            btninit.Location = new Point(879, 496);
             btninit.Name = "btninit";
             btninit.Size = new Size(131, 52);
             btninit.TabIndex = 14;
@@ -273,24 +272,11 @@
             btninit.UseVisualStyleBackColor = false;
             btninit.Click += btninit_Click;
             // 
-            // lblError
-            // 
-            lblError.AutoSize = true;
-            lblError.Font = new Font("맑은 고딕", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lblError.ForeColor = Color.Red;
-            lblError.Location = new Point(683, 482);
-            lblError.Name = "lblError";
-            lblError.Size = new Size(249, 37);
-            lblError.TabIndex = 15;
-            lblError.Text = "메뉴를 선택하세요.";
-            lblError.Visible = false;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1028, 603);
-            Controls.Add(lblError);
             Controls.Add(btninit);
             Controls.Add(btnOrder);
             Controls.Add(grpOrder);
@@ -332,6 +318,5 @@
         private ListBox lstOrder;
         private Button btnOrder;
         private Button btninit;
-        private Label lblError;
     }
 }
