@@ -22,10 +22,19 @@ namespace BurgerKiosk
 
             lstOrder.Items.Clear();
             lblTotalCost.Text = "총 금액 : 0원";
+            totalCost = 0;
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
+            if (!rdoHamBurger.Checked && !rdoBulgogiBurger.Checked && !rdoChickenBurger.Checked)
+            {
+                lblError.Visible = true;
+                return;
+            }
+
+            lblError.Visible = false;
+
             if (rdoHamBurger.Checked)
             {
                 totalCost += 5000;
